@@ -1188,22 +1188,7 @@ paths:
                     * `manual_translation`
                     * `automatic_google_transcription`
                     * `automatic_google_translation`
-                QualitativeAnalysis-SimpleTypes_:
-                  value:
-                  - action: <action_id>
-                    question_xpath: q1
-                    params:
-                    - type: <question_type>
-                      uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
-                      labels:
-                        _default: Qualitative analysis result
-                    uid: qa123456789AbCdEfGhIjklm
-                  summary: 'Qualitative Analysis - Simple Types '
-                  description: |-
-                    `<question_type>` may be either `qualText` or `qualInteger`
-
-                    `<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`
-                QualitativeAnalysis-SimpleTypes-ManualOnly:
+                ManualQualitativeAnalysis-SimpleTypes_:
                   value:
                   - action: manual_qual
                     question_xpath: q1
@@ -1213,11 +1198,17 @@ paths:
                       labels:
                         _default: Qualitative analysis result
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Simple Types - Manual Only
-                  description: '`<question_type>` may be either `qualNote` or `qualTags`'
-                QualitativeAnalysis-SingleChoiceQuestion:
+                  summary: 'Manual Qualitative Analysis - Simple Types '
+                  description: |
+                    `<question_type>` may be any of:
+
+                    * `qualText`
+                    * `qualInteger`
+                    * `qualNote`
+                    * `qualTags`
+                ManualQualitativeAnalysis-SingleChoiceQuestion:
                   value:
-                  - action: <action_id>
+                  - action: manual_qual
                     question_xpath: q1
                     params:
                     - type: qualSelectOne
@@ -1235,11 +1226,10 @@ paths:
                         labels:
                           _default: Low
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Single Choice Question
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-                QualitativeAnalysis-MultipleChoiceQuestion(withDeletedChoice):
+                  summary: Manual Qualitative Analysis - Single Choice Question
+                ManualQualitativeAnalysis-MultipleChoiceQuestion(withDeletedChoice):
                   value:
-                  - action: <action_id>
+                  - action: manual_qual
                     question_xpath: q1
                     params:
                     - type: qualSelectMultiple
@@ -1259,12 +1249,11 @@ paths:
                         labels:
                           _default: Medical
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Multiple Choice Question (with deleted
-                    choice)
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-                QualitativeAnalysis-DeletedQuestion:
+                  summary: Manual Qualitative Analysis - Multiple Choice Question
+                    (with deleted choice)
+                ManualQualitativeAnalysis-DeletedQuestion:
                   value:
-                  - action: <action_id>
+                  - action: manual_qual
                     question_xpath: q1
                     params:
                     - type: <question_type>
@@ -1274,8 +1263,15 @@ paths:
                     options:
                       deleted: true
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Deleted question
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
+                  summary: Manual Qualitative Analysis - Deleted question
+                AutomaticQualitativeAnalysis-AnyQuestion:
+                  value:
+                  - action: automatic_bedrock_qual
+                    question_xpath: q1
+                    params:
+                    - uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
+                    uid: qa123456789AbCdEfGhIjklm
+                  summary: Automatic Qualitative Analysis - Any question
           description: null
         '404':
           content:
@@ -1334,21 +1330,7 @@ paths:
                   * `manual_translation`
                   * `automatic_google_transcription`
                   * `automatic_google_translation`
-              QualitativeAnalysis-SimpleTypes:
-                value:
-                  action: <action_id>
-                  question_xpath: q1
-                  params:
-                  - type: <question_type>
-                    uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
-                    labels:
-                      _default: Qualitative analysis result
-                summary: Qualitative Analysis - Simple Types
-                description: |-
-                  `<question_type>` may be either `qualText` or `qualInteger`:
-
-                  `<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`
-              QualitativeAnalysis-SimpleTypes-ManualOnly:
+              ManualQualitativeAnalysis-SimpleTypes:
                 value:
                   action: manual_qual
                   question_xpath: q1
@@ -1357,11 +1339,17 @@ paths:
                     uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
                     labels:
                       _default: Qualitative analysis result
-                summary: Qualitative Analysis - Simple Types - Manual Only
-                description: '`<question_type>` may be either `qualTags` or `qualNote`'
-              QualitativeAnalysis-SingleChoiceQuestion:
+                summary: Manual Qualitative Analysis - Simple Types
+                description: |
+                  `<question_type>` may be any of:
+
+                  * `qualText`
+                  * `qualInteger`
+                  * `qualNote`
+                  * `qualTags`
+              ManualQualitativeAnalysis-SingleChoiceQuestion:
                 value:
-                  action: <action_id>
+                  action: manual_qual
                   question_xpath: q1
                   params:
                   - type: qualSelectOne
@@ -1378,11 +1366,10 @@ paths:
                     - uuid: gggggggg-bbbb-cccc-dddd-eeeeffffffff
                       labels:
                         _default: Low
-                summary: Qualitative Analysis - Single Choice Question
-                description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-              QualitativeAnalysis-MultipleChoiceQuestion:
+                summary: Manual Qualitative Analysis - Single Choice Question
+              ManualQualitativeAnalysis-MultipleChoiceQuestion:
                 value:
-                  action: <action_id>
+                  action: manual_qual
                   question_xpath: q1
                   params:
                   - type: qualSelectMultiple
@@ -1399,8 +1386,16 @@ paths:
                     - uuid: yyyyyyyy-bbbb-cccc-dddd-eeeeffffffff
                       labels:
                         _default: Medical
-                summary: Qualitative Analysis - Multiple Choice Question
-                description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
+                summary: Manual Qualitative Analysis - Multiple Choice Question
+              AutomaticQualitativeAnalysis-AnyQuestion:
+                value:
+                  action: automatic_bedrock_qual
+                  question_xpath: q1
+                  params:
+                  - uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
+                summary: Automatic Qualitative Analysis - Any Question
+                description: '`uuid`s should match those present in the `manual_qual`
+                  action for the same survey question.'
         required: true
       security:
       - BasicAuth: []
@@ -1484,22 +1479,7 @@ paths:
                     * `manual_translation`
                     * `automatic_google_transcription`
                     * `automatic_google_translation`
-                QualitativeAnalysis-SimpleTypes_:
-                  value:
-                    action: <action_id>
-                    question_xpath: q1
-                    params:
-                    - type: <question_type>
-                      uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
-                      labels:
-                        _default: Qualitative analysis result
-                    uid: qa123456789AbCdEfGhIjklm
-                  summary: 'Qualitative Analysis - Simple Types '
-                  description: |-
-                    `<question_type>` may be either `qualText` or `qualInteger`
-
-                    `<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`
-                QualitativeAnalysis-SimpleTypes-ManualOnly:
+                ManualQualitativeAnalysis-SimpleTypes_:
                   value:
                     action: manual_qual
                     question_xpath: q1
@@ -1509,11 +1489,17 @@ paths:
                       labels:
                         _default: Qualitative analysis result
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Simple Types - Manual Only
-                  description: '`<question_type>` may be either `qualNote` or `qualTags`'
-                QualitativeAnalysis-SingleChoiceQuestion:
+                  summary: 'Manual Qualitative Analysis - Simple Types '
+                  description: |
+                    `<question_type>` may be any of:
+
+                    * `qualText`
+                    * `qualInteger`
+                    * `qualNote`
+                    * `qualTags`
+                ManualQualitativeAnalysis-SingleChoiceQuestion:
                   value:
-                    action: <action_id>
+                    action: manual_qual
                     question_xpath: q1
                     params:
                     - type: qualSelectOne
@@ -1531,11 +1517,10 @@ paths:
                         labels:
                           _default: Low
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Single Choice Question
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-                QualitativeAnalysis-MultipleChoiceQuestion(withDeletedChoice):
+                  summary: Manual Qualitative Analysis - Single Choice Question
+                ManualQualitativeAnalysis-MultipleChoiceQuestion(withDeletedChoice):
                   value:
-                    action: <action_id>
+                    action: manual_qual
                     question_xpath: q1
                     params:
                     - type: qualSelectMultiple
@@ -1555,12 +1540,11 @@ paths:
                         labels:
                           _default: Medical
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Multiple Choice Question (with deleted
-                    choice)
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-                QualitativeAnalysis-DeletedQuestion:
+                  summary: Manual Qualitative Analysis - Multiple Choice Question
+                    (with deleted choice)
+                ManualQualitativeAnalysis-DeletedQuestion:
                   value:
-                    action: <action_id>
+                    action: manual_qual
                     question_xpath: q1
                     params:
                     - type: <question_type>
@@ -1570,8 +1554,15 @@ paths:
                     options:
                       deleted: true
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Deleted question
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
+                  summary: Manual Qualitative Analysis - Deleted question
+                AutomaticQualitativeAnalysis-AnyQuestion:
+                  value:
+                    action: automatic_bedrock_qual
+                    question_xpath: q1
+                    params:
+                    - uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
+                    uid: qa123456789AbCdEfGhIjklm
+                  summary: Automatic Qualitative Analysis - Any question
           description: null
         '404':
           content:
@@ -1636,28 +1627,22 @@ paths:
                   * `manual_translation`
                   * `automatic_google_transcription`
                   * `automatic_google_translation`
-              QualitativeAnalysis-SimpleTypes:
+              ManualQualitativeAnalysis-SimpleTypes:
                 value:
                   params:
                   - type: <question_type>
                     uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
                     labels:
                       _default: Qualitative analysis result
-                summary: Qualitative Analysis - Simple Types
-                description: |-
-                  `<question_type>` may be either `qualText` or `qualInteger`
+                summary: Manual Qualitative Analysis - Simple Types
+                description: |
+                  `<question_type>` may be any of:
 
-                  This may be used to update either `manual_qual` or `automatic_bedrock_qual` actions
-              QualitativeAnalysis-SimpleTypes-ManualOnly:
-                value:
-                  params:
-                  - type: <question_type>
-                    uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
-                    labels:
-                      _default: Qualitative analysis result
-                summary: Qualitative Analysis - Simple Types - Manual Only
-                description: '`<question_type>` may be either `qualTags` or `qualNote`'
-              QualitativeAnalysis-SingleChoiceQuestion:
+                  * `qualText`
+                  * `qualInteger`
+                  * `qualNote`
+                  * `qualTags`
+              ManualQualitativeAnalysis-SingleChoiceQuestion:
                 value:
                   params:
                   - type: qualSelectOne
@@ -1674,10 +1659,8 @@ paths:
                     - uuid: gggggggg-bbbb-cccc-dddd-eeeeffffffff
                       labels:
                         _default: Low
-                summary: Qualitative Analysis - Single Choice Question
-                description: This may be used to update either `manual_qual` or `automatic_bedrock_qual`
-                  actions
-              QualitativeAnalysis-MultipleChoiceQuestion:
+                summary: Manual Qualitative Analysis - Single Choice Question
+              ManualQualitativeAnalysis-MultipleChoiceQuestion:
                 value:
                   params:
                   - type: qualSelectMultiple
@@ -1694,9 +1677,15 @@ paths:
                     - uuid: yyyyyyyy-bbbb-cccc-dddd-eeeeffffffff
                       labels:
                         _default: Medical
-                summary: Qualitative Analysis - Multiple Choice Question
-                description: This may be used to update either `manual_qual` or `automatic_bedrock_qual`
-                  actions
+                summary: Manual Qualitative Analysis - Multiple Choice Question
+              AutomaticQualitativeAnalysis-AllTypes:
+                value:
+                  params:
+                  - uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
+                  - uuid: dddddddd-eeee-ffff-gggg-hhhhhhhhhhhhh
+                summary: Automatic Qualitative Analysis - All Types
+                description: '`uuid`s should match those present in the `manual_qual`
+                  action for the same survey question.'
       security:
       - BasicAuth: []
       - TokenAuth: []
@@ -1723,22 +1712,7 @@ paths:
                     * `manual_translation`
                     * `automatic_google_transcription`
                     * `automatic_google_translation`
-                QualitativeAnalysis-SimpleTypes_:
-                  value:
-                    action: <action_id>
-                    question_xpath: q1
-                    params:
-                    - type: <question_type>
-                      uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
-                      labels:
-                        _default: Qualitative analysis result
-                    uid: qa123456789AbCdEfGhIjklm
-                  summary: 'Qualitative Analysis - Simple Types '
-                  description: |-
-                    `<question_type>` may be either `qualText` or `qualInteger`
-
-                    `<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`
-                QualitativeAnalysis-SimpleTypes-ManualOnly:
+                ManualQualitativeAnalysis-SimpleTypes_:
                   value:
                     action: manual_qual
                     question_xpath: q1
@@ -1748,11 +1722,17 @@ paths:
                       labels:
                         _default: Qualitative analysis result
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Simple Types - Manual Only
-                  description: '`<question_type>` may be either `qualNote` or `qualTags`'
-                QualitativeAnalysis-SingleChoiceQuestion:
+                  summary: 'Manual Qualitative Analysis - Simple Types '
+                  description: |
+                    `<question_type>` may be any of:
+
+                    * `qualText`
+                    * `qualInteger`
+                    * `qualNote`
+                    * `qualTags`
+                ManualQualitativeAnalysis-SingleChoiceQuestion:
                   value:
-                    action: <action_id>
+                    action: manual_qual
                     question_xpath: q1
                     params:
                     - type: qualSelectOne
@@ -1770,11 +1750,10 @@ paths:
                         labels:
                           _default: Low
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Single Choice Question
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-                QualitativeAnalysis-MultipleChoiceQuestion(withDeletedChoice):
+                  summary: Manual Qualitative Analysis - Single Choice Question
+                ManualQualitativeAnalysis-MultipleChoiceQuestion(withDeletedChoice):
                   value:
-                    action: <action_id>
+                    action: manual_qual
                     question_xpath: q1
                     params:
                     - type: qualSelectMultiple
@@ -1794,12 +1773,11 @@ paths:
                         labels:
                           _default: Medical
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Multiple Choice Question (with deleted
-                    choice)
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
-                QualitativeAnalysis-DeletedQuestion:
+                  summary: Manual Qualitative Analysis - Multiple Choice Question
+                    (with deleted choice)
+                ManualQualitativeAnalysis-DeletedQuestion:
                   value:
-                    action: <action_id>
+                    action: manual_qual
                     question_xpath: q1
                     params:
                     - type: <question_type>
@@ -1809,8 +1787,15 @@ paths:
                     options:
                       deleted: true
                     uid: qa123456789AbCdEfGhIjklm
-                  summary: Qualitative Analysis - Deleted question
-                  description: '`<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`'
+                  summary: Manual Qualitative Analysis - Deleted question
+                AutomaticQualitativeAnalysis-AnyQuestion:
+                  value:
+                    action: automatic_bedrock_qual
+                    question_xpath: q1
+                    params:
+                    - uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
+                    uid: qa123456789AbCdEfGhIjklm
+                  summary: Automatic Qualitative Analysis - Any question
           description: null
         '404':
           content:
@@ -3042,15 +3027,15 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: 66666666-6666-6666-6666-666666666666
                               value: 42
                               status: complete
                             _uuid: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+                            verified: false
                   summary: Qualitative Analysis – Integer Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 QualitativeAnalysis–TextQuestion:
                   value:
                     _version: '20250820'
@@ -3061,15 +3046,15 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
                               value: This is a qualitative text response.
                               status: complete
                             _uuid: 12121212-3434-5656-7878-909090909090
+                            verified: false
                   summary: Qualitative Analysis – Text Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 QualitativeAnalysis–SingleChoiceQuestion:
                   value:
                     _version: '20250820'
@@ -3080,15 +3065,15 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: 77777777-7777-7777-7777-777777777777
                               value: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
                               status: complete
                             _uuid: bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb
+                            verified: false
                   summary: Qualitative Analysis – Single Choice Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 QualitativeAnalysis–MultipleChoiceQuestion:
                   value:
                     _version: '20250820'
@@ -3099,7 +3084,6 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: 88888888-8888-8888-8888-888888888888
                               value:
@@ -3107,9 +3091,10 @@ paths:
                               - bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb
                               status: complete
                             _uuid: 99999999-9999-9999-9999-999999999999
+                            verified: false
                   summary: Qualitative Analysis – Multiple Choice Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 ManualQualitativeAnalysis–TagsQuestion:
                   value:
                     _version: '20250820'
@@ -3120,7 +3105,6 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: bbbbbbbb-cccc-dddd-eeee-ffffffffffff
                               value:
@@ -3128,7 +3112,27 @@ paths:
                               - review
                               - priority
                             _uuid: 23232323-4545-6767-8989-010101010101
+                            verified: false
                   summary: Manual Qualitative Analysis – Tags Question
+                QualitativeAnalysis–VerifiedResponse:
+                  value:
+                    _version: '20250820'
+                    question_name_xpath:
+                      <action_id>:
+                        bbbbbbbb-cccc-dddd-eeee-ffffffffffff:
+                          _dateCreated: '2025-01-01T12:00:00Z'
+                          _dateModified: '2025-01-01T12:00:00Z'
+                          _versions:
+                          - _dateCreated: '2025-01-01T12:00:00Z'
+                            _dateVerified: '2025-01-01T12:00:00Z'
+                            _data:
+                              uuid: bbbbbbbb-cccc-dddd-eeee-ffffffffffff
+                              status: complete
+                              value: 5
+                            _uuid: 23232323-4545-6767-8989-010101010101
+                            verified: true
+                  summary: Qualitative Analysis – Verified Response
+                  description: '`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`. '
                 AutomaticQualitativeAnalysis–FailedResponse:
                   value:
                     _version: '20250820'
@@ -3139,12 +3143,12 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: bbbbbbbb-cccc-dddd-eeee-ffffffffffff
                               status: failed
                               error: Cannot parse response from LLM
                             _uuid: 23232323-4545-6767-8989-010101010101
+                            verified: false
                   summary: Automatic Qualitative Analysis – Failed response
           description: null
         '401':
@@ -3353,6 +3357,18 @@ paths:
                     automatic_bedrock_qual:
                       uuid: 44444444-4444-4444-4444-444444444444
                 summary: Automatic Bedrock Qualitative Analysis – Any Question
+              VerifyQualitativeAnalysisResponse–AnyQuestion:
+                value:
+                  _version: '20250820'
+                  question_name_xpath:
+                    <action_id>:
+                      uuid: 44444444-4444-4444-4444-4444444444444
+                      verified: true
+                summary: Verify Qualitative Analysis Response – Any Question
+                description: |-
+                  `<action_id>` may be either `manual_qual` or `automatic_bedrock_qual`
+
+                  Set `verified` to `False` to un-verify
         required: true
       security:
       - BasicAuth: []
@@ -3504,15 +3520,15 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: 66666666-6666-6666-6666-666666666666
                               value: 42
                               status: complete
                             _uuid: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+                            verified: false
                   summary: Qualitative Analysis – Integer Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 QualitativeAnalysis–TextQuestion:
                   value:
                     _version: '20250820'
@@ -3523,15 +3539,15 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: aaaaaaaa-bbbb-cccc-dddd-eeeeffffffff
                               value: This is a qualitative text response.
                               status: complete
                             _uuid: 12121212-3434-5656-7878-909090909090
+                            verified: false
                   summary: Qualitative Analysis – Text Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 QualitativeAnalysis–SingleChoiceQuestion:
                   value:
                     _version: '20250820'
@@ -3542,15 +3558,15 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: 77777777-7777-7777-7777-777777777777
                               value: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
                               status: complete
                             _uuid: bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb
+                            verified: false
                   summary: Qualitative Analysis – Single Choice Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 QualitativeAnalysis–MultipleChoiceQuestion:
                   value:
                     _version: '20250820'
@@ -3561,7 +3577,6 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: 88888888-8888-8888-8888-888888888888
                               value:
@@ -3569,9 +3584,10 @@ paths:
                               - bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb
                               status: complete
                             _uuid: 99999999-9999-9999-9999-999999999999
+                            verified: false
                   summary: Qualitative Analysis – Multiple Choice Question
-                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.\
-                    \ \n\n`status` will only be present for automatic_actions."
+                  description: "`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`.
+                    \n\n`status` will only be present for automatic_actions."
                 ManualQualitativeAnalysis–TagsQuestion:
                   value:
                     _version: '20250820'
@@ -3582,7 +3598,6 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: bbbbbbbb-cccc-dddd-eeee-ffffffffffff
                               value:
@@ -3590,7 +3605,27 @@ paths:
                               - review
                               - priority
                             _uuid: 23232323-4545-6767-8989-010101010101
+                            verified: false
                   summary: Manual Qualitative Analysis – Tags Question
+                QualitativeAnalysis–VerifiedResponse:
+                  value:
+                    _version: '20250820'
+                    question_name_xpath:
+                      <action_id>:
+                        bbbbbbbb-cccc-dddd-eeee-ffffffffffff:
+                          _dateCreated: '2025-01-01T12:00:00Z'
+                          _dateModified: '2025-01-01T12:00:00Z'
+                          _versions:
+                          - _dateCreated: '2025-01-01T12:00:00Z'
+                            _dateVerified: '2025-01-01T12:00:00Z'
+                            _data:
+                              uuid: bbbbbbbb-cccc-dddd-eeee-ffffffffffff
+                              status: complete
+                              value: 5
+                            _uuid: 23232323-4545-6767-8989-010101010101
+                            verified: true
+                  summary: Qualitative Analysis – Verified Response
+                  description: '`<action_id>` can  be either `manual_qual` or `automatic_bedrock_qual`. '
                 AutomaticQualitativeAnalysis–FailedResponse:
                   value:
                     _version: '20250820'
@@ -3601,12 +3636,12 @@ paths:
                           _dateModified: '2025-01-01T12:00:00Z'
                           _versions:
                           - _dateCreated: '2025-01-01T12:00:00Z'
-                            _dateAccepted: '2025-01-01T12:00:00Z'
                             _data:
                               uuid: bbbbbbbb-cccc-dddd-eeee-ffffffffffff
                               status: failed
                               error: Cannot parse response from LLM
                             _uuid: 23232323-4545-6767-8989-010101010101
+                            verified: false
                   summary: Automatic Qualitative Analysis – Failed response
           description: null
         '401':
@@ -5865,10 +5900,12 @@ paths:
           - 0
           - 1
           - 2
+          - 3
         description: |-
-          * `0` - Failed
-          * `1` - Pending
-          * `2` - Success
+          * `0` - failed
+          * `1` - pending
+          * `3` - processing
+          * `2` - success
       - in: path
         name: uid_asset
         schema:
@@ -10976,7 +11013,8 @@ components:
           items:
             anyOf:
             - $ref: '#/components/schemas/CreateResponseNLPActionParams'
-            - $ref: '#/components/schemas/CreateResponseQualActionParams'
+            - $ref: '#/components/schemas/CreateResponseManualQualActionParams'
+            - $ref: '#/components/schemas/CreateResponseAutomaticQualActionParams'
         uid:
           type: string
       required:
@@ -10996,7 +11034,8 @@ components:
           items:
             anyOf:
             - $ref: '#/components/schemas/RequestNLPActionParams'
-            - $ref: '#/components/schemas/RequestQualActionParams'
+            - $ref: '#/components/schemas/RequestManualQualActionParams'
+            - $ref: '#/components/schemas/RequestAutomaticQualActionParams'
       required:
       - action
       - params
@@ -11013,7 +11052,8 @@ components:
           items:
             anyOf:
             - $ref: '#/components/schemas/ResponseNLPActionParams'
-            - $ref: '#/components/schemas/ResponseQualActionParams'
+            - $ref: '#/components/schemas/ResponseManualQualActionParams'
+            - $ref: '#/components/schemas/ResponseAutomaticQualActionParams'
         uid:
           type: string
       required:
@@ -12170,6 +12210,19 @@ components:
         - file_type
         - metadata
         - user
+    CreateResponseAutomaticQualActionParams:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+      additionalProperties: false
+      required:
+      - uuid
+    CreateResponseManualQualActionParams:
+      anyOf:
+      - $ref: '#/components/schemas/CreateResponseQualSimpleQuestionParams'
+      - $ref: '#/components/schemas/CreateResponseQualSelectQuestionParams'
     CreateResponseNLPActionParams:
       type: object
       additionalProperties: false
@@ -12178,10 +12231,6 @@ components:
           type: string
       required:
       - language
-    CreateResponseQualActionParams:
-      anyOf:
-      - $ref: '#/components/schemas/CreateResponseQualSimpleQuestionParams'
-      - $ref: '#/components/schemas/CreateResponseQualSelectQuestionParams'
     CreateResponseQualSelectQuestionParams:
       type: object
       additionalProperties: false
@@ -12445,8 +12494,17 @@ components:
           type: string
           title: ' submitted by'
         _supplementalDetails:
-          type: object
-          additionalProperties: {}
+          oneOf:
+          - $ref: '#/components/schemas/SupplementalDetailsManualTranscription'
+          - $ref: '#/components/schemas/SupplementalDetailsManualTranslation'
+          - $ref: '#/components/schemas/SupplementalDetailsAutomaticTranscription'
+          - $ref: '#/components/schemas/SupplementalDetailsAutomaticTranslation'
+          - $ref: '#/components/schemas/SupplementalDetailsManualQual'
+          - $ref: '#/components/schemas/SupplementalDetailsAutomaticQual'
+          nullable: true
+          description: Action-specific supplemental data attached to this submission.
+            Structure varies by action type (transcription, translation, qual). Top-level
+            keys are question XPaths, values are action objects.
           title: ' supplementaldetails'
       required:
       - __version__
@@ -12516,7 +12574,7 @@ components:
           type: string
       required:
       - detail
-    DataSupplementAutomaticQualData('Integer',)Response:
+    DataSupplementAutomaticQualDataIntegerResponse:
       type: object
       additionalProperties: false
       oneOf:
@@ -12551,7 +12609,7 @@ components:
         - error
         - status
         - uuid
-    DataSupplementAutomaticQualData('SelectMultiple',)Response:
+    DataSupplementAutomaticQualDataSelectMultipleResponse:
       type: object
       additionalProperties: false
       oneOf:
@@ -12588,7 +12646,7 @@ components:
         - error
         - status
         - uuid
-    DataSupplementAutomaticQualData('SelectOne',)Response:
+    DataSupplementAutomaticQualDataSelectOneResponse:
       type: object
       additionalProperties: false
       oneOf:
@@ -12623,7 +12681,7 @@ components:
         - error
         - status
         - uuid
-    DataSupplementAutomaticQualData('Text',)Response:
+    DataSupplementAutomaticQualDataTextResponse:
       type: object
       additionalProperties: false
       oneOf:
@@ -12657,7 +12715,7 @@ components:
         - error
         - status
         - uuid
-    DataSupplementManualQualData('Integer',):
+    DataSupplementManualQualDataInteger:
       type: object
       additionalProperties: false
       properties:
@@ -12670,7 +12728,7 @@ components:
       required:
       - uuid
       - value
-    DataSupplementManualQualData('SelectMultiple',):
+    DataSupplementManualQualDataSelectMultiple:
       type: object
       additionalProperties: false
       properties:
@@ -12685,7 +12743,7 @@ components:
       required:
       - uuid
       - value
-    DataSupplementManualQualData('SelectOne',):
+    DataSupplementManualQualDataSelectOne:
       type: object
       additionalProperties: false
       properties:
@@ -12698,7 +12756,7 @@ components:
       required:
       - uuid
       - value
-    DataSupplementManualQualData('Tags',):
+    DataSupplementManualQualDataTags:
       type: object
       additionalProperties: false
       properties:
@@ -12712,7 +12770,7 @@ components:
       required:
       - uuid
       - value
-    DataSupplementManualQualData('Text',):
+    DataSupplementManualQualDataText:
       type: object
       additionalProperties: false
       properties:
@@ -12731,521 +12789,12 @@ components:
           type: string
           example: '20250820'
       additionalProperties:
-        $ref: '#/components/schemas/DataSupplementResponseOneOf'
+        $ref: '#/components/schemas/SupplementalDataResponseAction'
       required:
       - _version
       patternProperties:
         ^(?!_version$).*:
-          $ref: '#/components/schemas/DataSupplementResponseOneOf'
-    DataSupplementResponseOneOf:
-      type: object
-      properties:
-        manual_transcription:
-          type: object
-          properties:
-            _dateCreated:
-              type: string
-              format: date-time
-            _dateModified:
-              type: string
-              format: date-time
-            _versions:
-              type: array
-              items:
-                type: object
-                properties:
-                  _dateCreated:
-                    type: string
-                    format: date-time
-                  _uuid:
-                    type: string
-                    format: uuid
-                  _dateAccepted:
-                    type: string
-                    format: date-time
-                  _data:
-                    type: object
-                    properties:
-                      language:
-                        type: string
-                      locale:
-                        type: string
-                      value:
-                        type: string
-                        nullable: true
-                    additionalProperties: false
-                    required:
-                    - language
-                    - value
-                additionalProperties: false
-                required:
-                - _data
-                - _dateAccepted
-                - _dateCreated
-                - _uuid
-              minLength: 1
-          additionalProperties: false
-          required:
-          - _dateCreated
-          - _dateModified
-          - _versions
-        manual_translation:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              _dateCreated:
-                type: string
-                format: date-time
-              _dateModified:
-                type: string
-                format: date-time
-              _versions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _dateCreated:
-                      type: string
-                      format: date-time
-                    _uuid:
-                      type: string
-                      format: uuid
-                    _dependency:
-                      type: object
-                      properties:
-                        _actionId:
-                          type: string
-                        _uuid:
-                          type: string
-                          format: uuid
-                      additionalProperties: false
-                      required:
-                      - _actionId
-                      - _uuid
-                    _dateAccepted:
-                      type: string
-                      format: date-time
-                    _data:
-                      type: object
-                      properties:
-                        language:
-                          type: string
-                        locale:
-                          type: string
-                        value:
-                          type: string
-                          nullable: true
-                      additionalProperties: false
-                      required:
-                      - language
-                      - value
-                  additionalProperties: false
-                  required:
-                  - _data
-                  - _dateAccepted
-                  - _dateCreated
-                  - _dependency
-                  - _uuid
-                minLength: 1
-            additionalProperties: false
-            required:
-            - _dateCreated
-            - _dateModified
-            - _versions
-        automatic_google_transcription:
-          type: object
-          properties:
-            _dateCreated:
-              type: string
-              format: date-time
-            _dateModified:
-              type: string
-              format: date-time
-            _versions:
-              type: array
-              items:
-                type: object
-                properties:
-                  _dateCreated:
-                    type: string
-                    format: date-time
-                  _uuid:
-                    type: string
-                    format: uuid
-                  _dateAccepted:
-                    type: string
-                    format: date-time
-                  _data:
-                    oneOf:
-                    - type: object
-                      properties:
-                        language:
-                          type: string
-                        locale:
-                          type: string
-                        status:
-                          type: string
-                          const: in_progress
-                      additionalProperties: false
-                      required:
-                      - language
-                      - status
-                    - type: object
-                      properties:
-                        language:
-                          type: string
-                        locale:
-                          type: string
-                        status:
-                          type: string
-                          const: failed
-                        error:
-                          type: string
-                      additionalProperties: false
-                      required:
-                      - error
-                      - language
-                      - status
-                    - type: object
-                      properties:
-                        language:
-                          type: string
-                        locale:
-                          type: string
-                        status:
-                          type: string
-                          const: complete
-                        value:
-                          type: string
-                      additionalProperties: false
-                      required:
-                      - language
-                      - status
-                      - value
-                    - type: object
-                      properties:
-                        language:
-                          type: string
-                        locale:
-                          type: string
-                        status:
-                          type: string
-                          const: deleted
-                        value:
-                          type: 'null'
-                      additionalProperties: false
-                      required:
-                      - language
-                      - status
-                      - value
-                additionalProperties: false
-                required:
-                - _data
-                - _dateCreated
-                - _uuid
-              minLength: 1
-          additionalProperties: false
-          required:
-          - _dateCreated
-          - _dateModified
-          - _versions
-        automatic_google_translation:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              _dateCreated:
-                type: string
-                format: date-time
-              _dateModified:
-                type: string
-                format: date-time
-              _versions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _dateCreated:
-                      type: string
-                      format: date-time
-                    _uuid:
-                      type: string
-                      format: uuid
-                    _dependency:
-                      type: object
-                      properties:
-                        _actionId:
-                          type: string
-                        _uuid:
-                          type: string
-                          format: uuid
-                      additionalProperties: false
-                      required:
-                      - _actionId
-                      - _uuid
-                    _dateAccepted:
-                      type: string
-                      format: date-time
-                    _data:
-                      oneOf:
-                      - type: object
-                        properties:
-                          language:
-                            type: string
-                          locale:
-                            type: string
-                          status:
-                            type: string
-                            const: in_progress
-                        additionalProperties: false
-                        required:
-                        - language
-                        - status
-                      - type: object
-                        properties:
-                          language:
-                            type: string
-                          locale:
-                            type: string
-                          status:
-                            type: string
-                            const: failed
-                          error:
-                            type: string
-                        additionalProperties: false
-                        required:
-                        - error
-                        - language
-                        - status
-                      - type: object
-                        properties:
-                          language:
-                            type: string
-                          locale:
-                            type: string
-                          status:
-                            type: string
-                            const: complete
-                          value:
-                            type: string
-                        additionalProperties: false
-                        required:
-                        - language
-                        - status
-                        - value
-                      - type: object
-                        properties:
-                          language:
-                            type: string
-                          locale:
-                            type: string
-                          status:
-                            type: string
-                            const: deleted
-                          value:
-                            type: 'null'
-                        additionalProperties: false
-                        required:
-                        - language
-                        - status
-                        - value
-                  additionalProperties: false
-                  required:
-                  - _data
-                  - _dateCreated
-                  - _dependency
-                  - _uuid
-                minLength: 1
-            additionalProperties: false
-            required:
-            - _dateCreated
-            - _dateModified
-            - _versions
-        manual_qual:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              _dateCreated:
-                type: string
-                format: date-time
-              _dateModified:
-                type: string
-                format: date-time
-              _versions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _data:
-                      oneOf:
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''Integer'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''Text'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectOne'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectMultiple'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''Tags'',)'
-                    _dateAccepted:
-                      type: string
-                      format: date-time
-                    _dateCreated:
-                      type: string
-                      format: date-time
-                    _uuid:
-                      type: string
-                      format: uuid
-                  additionalProperties: false
-                  required:
-                  - _data
-                  - _dateCreated
-                  - _uuid
-                minLength: 1
-            additionalProperties: false
-            required:
-            - _dateCreated
-            - _dateModified
-            - _versions
-          patternProperties:
-            ^[0-9a-fA-F-]{36}$:
-              type: object
-              properties:
-                _dateCreated:
-                  type: string
-                  format: date-time
-                _dateModified:
-                  type: string
-                  format: date-time
-                _versions:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      _data:
-                        oneOf:
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''Integer'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''Text'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectOne'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectMultiple'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''Tags'',)'
-                      _dateAccepted:
-                        type: string
-                        format: date-time
-                      _dateCreated:
-                        type: string
-                        format: date-time
-                      _uuid:
-                        type: string
-                        format: uuid
-                    additionalProperties: false
-                    required:
-                    - _data
-                    - _dateCreated
-                    - _uuid
-                  minLength: 1
-              additionalProperties: false
-              required:
-              - _dateCreated
-              - _dateModified
-              - _versions
-        automatic_bedrock_qual:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              _dateCreated:
-                type: string
-                format: date-time
-              _dateModified:
-                type: string
-                format: date-time
-              _versions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _data:
-                      oneOf:
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''Integer'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''Text'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectOne'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectMultiple'',)'
-                      - $ref: '#/components/schemas/DataSupplementManualQualData(''Tags'',)'
-                    _dateAccepted:
-                      type: string
-                      format: date-time
-                    _dateCreated:
-                      type: string
-                      format: date-time
-                    _uuid:
-                      type: string
-                      format: uuid
-                  additionalProperties: false
-                  required:
-                  - _data
-                  - _dateCreated
-                  - _uuid
-                minLength: 1
-            additionalProperties: false
-            required:
-            - _dateCreated
-            - _dateModified
-            - _versions
-          patternProperties:
-            ^[0-9a-fA-F-]{36}$:
-              type: object
-              properties:
-                _dateCreated:
-                  type: string
-                  format: date-time
-                _dateModified:
-                  type: string
-                  format: date-time
-                _versions:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      _data:
-                        oneOf:
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''Integer'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''Text'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectOne'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectMultiple'',)'
-                        - $ref: '#/components/schemas/DataSupplementManualQualData(''Tags'',)'
-                      _dateAccepted:
-                        type: string
-                        format: date-time
-                      _dateCreated:
-                        type: string
-                        format: date-time
-                      _uuid:
-                        type: string
-                        format: uuid
-                    additionalProperties: false
-                    required:
-                    - _data
-                    - _dateCreated
-                    - _uuid
-                  minLength: 1
-              additionalProperties: false
-              required:
-              - _dateCreated
-              - _dateModified
-              - _versions
-      additionalProperties: false
-      anyOf:
-      - required:
-        - manual_transcription
-      - required:
-        - manual_translation
-      - required:
-        - automatic_google_transcription
-      - required:
-        - automatic_google_translation
-      - required:
-        - manual_qual
-      - required:
-        - automatic_bedrock_qual
+          $ref: '#/components/schemas/SupplementalDataResponseAction'
     DataValidationStatus:
       type: object
       properties:
@@ -14021,12 +13570,14 @@ components:
       enum:
       - 0
       - 1
+      - 3
       - 2
       type: integer
       description: |-
-        * `0` - Failed
-        * `1` - Pending
-        * `2` - Success
+        * `0` - failed
+        * `1` - pending
+        * `3` - processing
+        * `2` - success
     HookRetryResponse:
       type: object
       properties:
@@ -15957,7 +15508,8 @@ components:
           items:
             anyOf:
             - $ref: '#/components/schemas/RequestNLPActionParams'
-            - $ref: '#/components/schemas/RequestQualActionParams'
+            - $ref: '#/components/schemas/RequestManualQualActionParams'
+            - $ref: '#/components/schemas/RequestAutomaticQualActionParams'
     PatchedAssetPatchRequest:
       oneOf:
       - type: object
@@ -16178,13 +15730,16 @@ components:
           - language
         manual_qual:
           oneOf:
-          - $ref: '#/components/schemas/DataSupplementManualQualData(''Integer'',)'
-          - $ref: '#/components/schemas/DataSupplementManualQualData(''Text'',)'
-          - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectOne'',)'
-          - $ref: '#/components/schemas/DataSupplementManualQualData(''SelectMultiple'',)'
-          - $ref: '#/components/schemas/DataSupplementManualQualData(''Tags'',)'
+          - $ref: '#/components/schemas/DataSupplementManualQualDataInteger'
+          - $ref: '#/components/schemas/DataSupplementManualQualDataText'
+          - $ref: '#/components/schemas/DataSupplementManualQualDataSelectOne'
+          - $ref: '#/components/schemas/DataSupplementManualQualDataSelectMultiple'
+          - $ref: '#/components/schemas/DataSupplementManualQualDataTags'
+          - $ref: '#/components/schemas/PatchedDataSupplementPayloadOneOfVerification'
         automatic_bedrock_qual:
-          $ref: '#/components/schemas/PatchedDataSupplementPayloadOneOfAutomaticQual'
+          oneOf:
+          - $ref: '#/components/schemas/PatchedDataSupplementPayloadOneOfAutomaticQual'
+          - $ref: '#/components/schemas/PatchedDataSupplementPayloadOneOfVerification'
       additionalProperties: false
       anyOf:
       - required:
@@ -16208,6 +15763,18 @@ components:
           format: uuid
       required:
       - uuid
+    PatchedDataSupplementPayloadOneOfVerification:
+      type: object
+      additionalProperties: false
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        verified:
+          type: boolean
+      required:
+      - uuid
+      - verified
     PatchedDataValidationStatusUpdatePayload:
       type: object
       properties:
@@ -17248,6 +16815,19 @@ components:
       - count
       - list
       - url
+    RequestAutomaticQualActionParams:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+      additionalProperties: false
+      required:
+      - uuid
+    RequestManualQualActionParams:
+      anyOf:
+      - $ref: '#/components/schemas/RequestQualSimpleQuestionParams'
+      - $ref: '#/components/schemas/RequestQualSelectQuestionParams'
     RequestNLPActionParams:
       type: object
       additionalProperties: false
@@ -17256,10 +16836,6 @@ components:
           type: string
       required:
       - language
-    RequestQualActionParams:
-      anyOf:
-      - $ref: '#/components/schemas/RequestQualSimpleQuestionParams'
-      - $ref: '#/components/schemas/RequestQualSelectQuestionParams'
     RequestQualSelectQuestionParams:
       type: object
       additionalProperties: false
@@ -17326,6 +16902,19 @@ components:
       - uuid
       - type
       - labels
+    ResponseAutomaticQualActionParams:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+      additionalProperties: false
+      required:
+      - uuid
+    ResponseManualQualActionParams:
+      anyOf:
+      - $ref: '#/components/schemas/ResponseQualSimpleQuestionParams'
+      - $ref: '#/components/schemas/ResponseQualSelectQuestionParams'
     ResponseNLPActionParams:
       type: object
       additionalProperties: false
@@ -17334,10 +16923,6 @@ components:
           type: string
       required:
       - language
-    ResponseQualActionParams:
-      anyOf:
-      - $ref: '#/components/schemas/ResponseQualSimpleQuestionParams'
-      - $ref: '#/components/schemas/ResponseQualSelectQuestionParams'
     ResponseQualSelectQuestionParams:
       type: object
       additionalProperties: false
@@ -17597,6 +17182,7 @@ components:
           type: string
           format: date-time
           readOnly: true
+        stripe_data: {}
         id:
           type: string
           maxLength: 255
@@ -17929,6 +17515,479 @@ components:
       - user
       - user_uid
       - username
+    SupplementalDataAutomaticQual:
+      type: object
+      description: Map of automatic question UUIDs to their action objects
+      additionalProperties:
+        $ref: '#/components/schemas/SupplementalDataAutomaticQualItem'
+      patternProperties:
+        ^[0-9a-fA-F-]{36}$:
+          $ref: '#/components/schemas/SupplementalDataAutomaticQualItem'
+    SupplementalDataAutomaticQualItem:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateModified:
+          type: string
+          format: date-time
+        _versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalDataVersionItemQualAutomatic'
+          minLength: 1
+      additionalProperties: false
+      required:
+      - _dateCreated
+      - _dateModified
+      - _versions
+    SupplementalDataAutomaticTranscription:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateModified:
+          type: string
+          format: date-time
+        _versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalDataVersionItemAutomatic'
+          minLength: 1
+      additionalProperties: false
+      required:
+      - _dateCreated
+      - _dateModified
+      - _versions
+    SupplementalDataAutomaticTranslation:
+      type: object
+      description: Map of language codes to automatic translation objects
+      additionalProperties:
+        $ref: '#/components/schemas/SupplementalDataAutomaticTranslationItem'
+    SupplementalDataAutomaticTranslationItem:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateModified:
+          type: string
+          format: date-time
+        _versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalDataVersionItemAutomaticWithDep'
+          minLength: 1
+      additionalProperties: false
+      required:
+      - _dateCreated
+      - _dateModified
+      - _versions
+    SupplementalDataContentAutomatic:
+      oneOf:
+      - $ref: '#/components/schemas/SupplementalDataContentAutomaticInProgress'
+      - $ref: '#/components/schemas/SupplementalDataContentAutomaticFailed'
+      - $ref: '#/components/schemas/SupplementalDataContentAutomaticComplete'
+      - $ref: '#/components/schemas/SupplementalDataContentAutomaticDeleted'
+    SupplementalDataContentAutomaticComplete:
+      type: object
+      properties:
+        language:
+          type: string
+        locale:
+          type: string
+        status:
+          type: string
+          const: complete
+        value:
+          type: string
+      additionalProperties: false
+      required:
+      - language
+      - status
+      - value
+    SupplementalDataContentAutomaticDeleted:
+      type: object
+      properties:
+        language:
+          type: string
+        locale:
+          type: string
+        status:
+          type: string
+          const: deleted
+        value:
+          type: 'null'
+      additionalProperties: false
+      required:
+      - language
+      - status
+      - value
+    SupplementalDataContentAutomaticFailed:
+      type: object
+      properties:
+        language:
+          type: string
+        locale:
+          type: string
+        status:
+          type: string
+          const: failed
+        error:
+          type: string
+      additionalProperties: false
+      required:
+      - error
+      - language
+      - status
+    SupplementalDataContentAutomaticInProgress:
+      type: object
+      properties:
+        language:
+          type: string
+        locale:
+          type: string
+        status:
+          type: string
+          const: in_progress
+      additionalProperties: false
+      required:
+      - language
+      - status
+    SupplementalDataContentManual:
+      type: object
+      properties:
+        language:
+          type: string
+        locale:
+          type: string
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+      required:
+      - language
+      - value
+    SupplementalDataDependency:
+      type: object
+      properties:
+        _actionId:
+          type: string
+        _uuid:
+          type: string
+          format: uuid
+      additionalProperties: false
+      required:
+      - _actionId
+      - _uuid
+    SupplementalDataManualQual:
+      type: object
+      description: Map of manual qualitative question UUIDs to their action objects
+      additionalProperties:
+        $ref: '#/components/schemas/SupplementalDataManualQualItem'
+      patternProperties:
+        ^[0-9a-fA-F-]{36}$:
+          $ref: '#/components/schemas/SupplementalDataManualQualItem'
+    SupplementalDataManualQualItem:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateModified:
+          type: string
+          format: date-time
+        _versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalDataVersionItemQual'
+          minLength: 1
+      additionalProperties: false
+      required:
+      - _dateCreated
+      - _dateModified
+      - _versions
+    SupplementalDataManualTranscription:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateModified:
+          type: string
+          format: date-time
+        _versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalDataVersionItemManual'
+          minLength: 1
+      additionalProperties: false
+      required:
+      - _dateCreated
+      - _dateModified
+      - _versions
+    SupplementalDataManualTranslation:
+      type: object
+      description: Map of language codes to manual translation objects
+      additionalProperties:
+        $ref: '#/components/schemas/SupplementalDataManualTranslationItem'
+    SupplementalDataManualTranslationItem:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateModified:
+          type: string
+          format: date-time
+        _versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalDataVersionItemManualWithDep'
+          minLength: 1
+      additionalProperties: false
+      required:
+      - _dateCreated
+      - _dateModified
+      - _versions
+    SupplementalDataQualData:
+      oneOf:
+      - $ref: '#/components/schemas/DataSupplementManualQualDataInteger'
+      - $ref: '#/components/schemas/DataSupplementManualQualDataText'
+      - $ref: '#/components/schemas/DataSupplementManualQualDataSelectOne'
+      - $ref: '#/components/schemas/DataSupplementManualQualDataSelectMultiple'
+      - $ref: '#/components/schemas/DataSupplementManualQualDataTags'
+    SupplementalDataQualDataAutomatic:
+      oneOf:
+      - $ref: '#/components/schemas/DataSupplementAutomaticQualDataIntegerResponse'
+      - $ref: '#/components/schemas/DataSupplementAutomaticQualDataTextResponse'
+      - $ref: '#/components/schemas/DataSupplementAutomaticQualDataSelectOneResponse'
+      - $ref: '#/components/schemas/DataSupplementAutomaticQualDataSelectMultipleResponse'
+    SupplementalDataResponseAction:
+      type: object
+      properties:
+        manual_transcription:
+          $ref: '#/components/schemas/SupplementalDataManualTranscription'
+        manual_translation:
+          $ref: '#/components/schemas/SupplementalDataManualTranslation'
+        automatic_google_transcription:
+          $ref: '#/components/schemas/SupplementalDataAutomaticTranscription'
+        automatic_google_translation:
+          $ref: '#/components/schemas/SupplementalDataAutomaticTranslation'
+        manual_qual:
+          $ref: '#/components/schemas/SupplementalDataManualQual'
+        automatic_bedrock_qual:
+          $ref: '#/components/schemas/SupplementalDataAutomaticQual'
+      additionalProperties: false
+      anyOf:
+      - required:
+        - manual_transcription
+      - required:
+        - manual_translation
+      - required:
+        - automatic_google_transcription
+      - required:
+        - automatic_google_translation
+      - required:
+        - manual_qual
+      - required:
+        - automatic_bedrock_qual
+    SupplementalDataVersionItemAutomatic:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _uuid:
+          type: string
+          format: uuid
+        _dateAccepted:
+          type: string
+          format: date-time
+        _data:
+          $ref: '#/components/schemas/SupplementalDataContentAutomatic'
+      additionalProperties: false
+      required:
+      - _data
+      - _dateCreated
+      - _uuid
+    SupplementalDataVersionItemAutomaticWithDep:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _uuid:
+          type: string
+          format: uuid
+        _dateAccepted:
+          type: string
+          format: date-time
+        _dependency:
+          $ref: '#/components/schemas/SupplementalDataDependency'
+        _data:
+          $ref: '#/components/schemas/SupplementalDataContentAutomatic'
+      additionalProperties: false
+      required:
+      - _data
+      - _dateCreated
+      - _dependency
+      - _uuid
+    SupplementalDataVersionItemManual:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _uuid:
+          type: string
+          format: uuid
+        _dateAccepted:
+          type: string
+          format: date-time
+        _data:
+          $ref: '#/components/schemas/SupplementalDataContentManual'
+      additionalProperties: false
+      required:
+      - _data
+      - _dateAccepted
+      - _dateCreated
+      - _uuid
+    SupplementalDataVersionItemManualWithDep:
+      type: object
+      properties:
+        _dateCreated:
+          type: string
+          format: date-time
+        _uuid:
+          type: string
+          format: uuid
+        _dateAccepted:
+          type: string
+          format: date-time
+        _dependency:
+          $ref: '#/components/schemas/SupplementalDataDependency'
+        _data:
+          $ref: '#/components/schemas/SupplementalDataContentManual'
+      additionalProperties: false
+      required:
+      - _data
+      - _dateAccepted
+      - _dateCreated
+      - _dependency
+      - _uuid
+    SupplementalDataVersionItemQual:
+      type: object
+      properties:
+        _data:
+          $ref: '#/components/schemas/SupplementalDataQualData'
+        _dateAccepted:
+          type: string
+          format: date-time
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateVerified:
+          type: string
+          format: date-time
+        _uuid:
+          type: string
+          format: uuid
+        verified:
+          type: boolean
+      additionalProperties: false
+      required:
+      - _data
+      - _dateCreated
+      - _uuid
+    SupplementalDataVersionItemQualAutomatic:
+      type: object
+      properties:
+        _data:
+          $ref: '#/components/schemas/SupplementalDataQualDataAutomatic'
+        _dateAccepted:
+          type: string
+          format: date-time
+        _dateCreated:
+          type: string
+          format: date-time
+        _dateVerified:
+          type: string
+          format: date-time
+        _uuid:
+          type: string
+          format: uuid
+        _dependency:
+          $ref: '#/components/schemas/SupplementalDataDependency'
+        verified:
+          type: boolean
+      additionalProperties: false
+      required:
+      - _data
+      - _dateCreated
+      - _uuid
+    SupplementalDetailsAutomaticQual:
+      type: object
+      description: Automatic qualitative supplemental details
+      additionalProperties:
+        type: object
+        properties:
+          automatic_bedrock_qual:
+            $ref: '#/components/schemas/SupplementalDataAutomaticQual'
+        required:
+        - automatic_bedrock_qual
+    SupplementalDetailsAutomaticTranscription:
+      type: object
+      description: Automatic transcription supplemental details
+      additionalProperties:
+        type: object
+        properties:
+          automatic_google_transcription:
+            $ref: '#/components/schemas/SupplementalDataAutomaticTranscription'
+        required:
+        - automatic_google_transcription
+    SupplementalDetailsAutomaticTranslation:
+      type: object
+      description: Automatic translation supplemental details
+      additionalProperties:
+        type: object
+        properties:
+          automatic_google_translation:
+            $ref: '#/components/schemas/SupplementalDataAutomaticTranslation'
+        required:
+        - automatic_google_translation
+    SupplementalDetailsManualQual:
+      type: object
+      description: Manual qualitative supplemental details
+      additionalProperties:
+        type: object
+        properties:
+          manual_qual:
+            $ref: '#/components/schemas/SupplementalDataManualQual'
+        required:
+        - manual_qual
+    SupplementalDetailsManualTranscription:
+      type: object
+      description: Manual transcription supplemental details
+      additionalProperties:
+        type: object
+        properties:
+          manual_transcription:
+            $ref: '#/components/schemas/SupplementalDataManualTranscription'
+        required:
+        - manual_transcription
+    SupplementalDetailsManualTranslation:
+      type: object
+      description: Manual translation supplemental details
+      additionalProperties:
+        type: object
+        properties:
+          manual_translation:
+            $ref: '#/components/schemas/SupplementalDataManualTranslation'
+        required:
+        - manual_translation
     TagListResponse:
       type: object
       properties:

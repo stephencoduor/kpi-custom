@@ -20,14 +20,17 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 from kobo.apps.audit_log.base_views import AuditLoggedViewSet
 from kobo.apps.audit_log.models import AuditType
 from kobo.apps.audit_log.utils import SubmissionUpdate
+from kobo.apps.openrosa.apps.logger.models import Instance
 from kobo.apps.openrosa.apps.logger.xform_instance_parser import (
     add_uuid_prefix,
     remove_uuid_prefix,
 )
 from kobo.apps.openrosa.libs.utils.logger_tools import http_open_rosa_error_handler
 from kobo.apps.subsequences.exceptions import (
+    AnalysisQuestionNotFound,
     InvalidAction,
     InvalidXPath,
+    ManualQualNotFound,
     SubsequenceAcceptanceError,
     SubsequenceDeletionError,
     SubsequenceVerificationError,
@@ -590,6 +593,14 @@ class DataViewSet(
             raise serializers.ValidationError({'detail': 'No response to verify'})
         except SubsequenceAcceptanceError:
             raise serializers.ValidationError({'detail': 'No response to accept'})
+        except ManualQualNotFound:
+            raise serializers.ValidationError(
+                {'detail': 'No qualitative analysis questions to answer'}
+            )
+        except AnalysisQuestionNotFound:
+            raise serializers.ValidationError(
+                {'detail': 'Invalid qualitative analysis question uuid'}
+            )
 
         return Response(supplemental_data)
 
@@ -744,14 +755,15 @@ class DataViewSet(
                 id=sub['_id'],
                 username=sub['_submitted_by'],
                 action='delete',
-                root_uuid=sub['meta/rootUuid'],
+                root_uuid=remove_uuid_prefix(sub['meta/rootUuid']),
             )
             for sub in submissions
         }
+        request._request.asset = self.asset
 
         try:
             deleted = deployment.delete_submissions(
-                bulk_actions_validator.data, request.user, request=request
+                bulk_actions_validator.data, request.user
             )
         except (MissingXFormException, InvalidXFormException):
             return {
@@ -875,6 +887,29 @@ class DataViewSet(
         submission_json = deployment.get_submission(
             submission_id, user, request=request
         )
+
+        # Block edit if the submission has duplicates.
+        if (
+            Instance.objects.filter(
+                uuid=remove_uuid_prefix(
+                    submission_json[deployment.SUBMISSION_CURRENT_UUID_XPATH]
+                ),
+                xform_id=deployment.xform_id,
+            )
+            .exclude(pk=submission_id)
+            .exists()
+        ):
+            # Return an error immediately to prevent the user from receiving an error
+            # when submitting their edit in Enketo
+            return Response(
+                {
+                    'detail': (
+                        'A duplicate submission has been detected. '
+                        'This submission cannot be edited at the moment.'
+                    )
+                },
+                status=status.HTTP_409_CONFLICT,
+            )
 
         # Add mandatory XML elements if they are missing from the original
         # submission. They could be overwritten unconditionally, but be

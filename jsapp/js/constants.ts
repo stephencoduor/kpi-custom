@@ -52,6 +52,7 @@ export const HOOK_LOG_STATUSES = {
   SUCCESS: 2,
   PENDING: 1,
   FAILED: 0,
+  PROCESSING: 3,
 }
 
 export const KEY_CODES = Object.freeze({
@@ -494,12 +495,6 @@ export const MATRIX_PAIR_PROPS = {
   inChoices: 'list_name',
 }
 
-export const DEPLOYMENT_CATEGORIES = Object.freeze({
-  Deployed: { id: 'Deployed', label: t('Deployed') },
-  Draft: { id: 'Draft', label: t('Draft') },
-  Archived: { id: 'Archived', label: t('Archived') },
-})
-
 export const QUERY_LIMIT_DEFAULT = 5000
 
 export const MAX_DISPLAYED_STRING_LENGTH = Object.freeze({
@@ -634,7 +629,6 @@ const constants = {
   GROUP_TYPES_END,
   SCORE_ROW_TYPE,
   RANK_LEVEL_TYPE,
-  DEPLOYMENT_CATEGORIES,
   QUERY_LIMIT_DEFAULT,
   CHOICE_LISTS,
   MAX_DISPLAYED_STRING_LENGTH,
